@@ -1,0 +1,17 @@
+language: java
+
+env:
+  global:
+    - COVERALLS_REPO_TOKEN=kwej0xyQVradkZFuFqI4CLdXZpXqdfj86
+
+
+before_script:
+- "Xvfb :99 &"
+- "export DISPLAY=:99.0"
+- sleep 3 # give xvfb some time to start
+
+script:
+- ./gradlew build cucumber
+
+after_success:
+- ./gradlew jacocoTestReport coveralls
