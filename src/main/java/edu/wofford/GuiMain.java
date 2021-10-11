@@ -37,6 +37,7 @@ public class GuiMain extends JFrame implements ActionListener {
     public GuiMain() {
       t = new TicTacToeModel();
       result = new JLabel("");
+      result.setName("result");
       add(result, BorderLayout.PAGE_START);
       buttons = new JButton[9];
       JPanel buttonPanel = new JPanel();
