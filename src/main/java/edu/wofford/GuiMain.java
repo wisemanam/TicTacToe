@@ -20,9 +20,9 @@ public class GuiMain extends JFrame implements ActionListener {
         }
       }
       if (playValid) {
-        if (t.isXTurn() && button.getText().equals("")) {
+        if (!t.isXTurn() && button.getText().equals("")) {
             button.setText("X");
-        } else if (!t.isXTurn() && button.getText().equals("")) {
+        } else if (t.isXTurn() && button.getText().equals("")) {
             button.setText("O");
         }
         String winner = t.getWinner();
@@ -37,8 +37,10 @@ public class GuiMain extends JFrame implements ActionListener {
     public GuiMain() {
       t = new TicTacToeModel();
       result = new JLabel("");
-      add(result, BorderLayout.NORTH);
+      add(result, BorderLayout.PAGE_START);
       buttons = new JButton[9];
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new GridLayout(3, 3));
       for (int i = 0; i < 9; i++) {
         buttons[i] = new JButton();
         buttons[i].addActionListener(this);
@@ -49,18 +51,17 @@ public class GuiMain extends JFrame implements ActionListener {
         } else if (i < 9) {
           buttons[i].setName("location" + "2" + String.valueOf(i - 6));
         }
-        add(buttons[i]);
+        buttonPanel.add(buttons[i]);
       }
+      add(buttonPanel);
+      pack();
+      setSize(400, 400);
+      setTitle("Tic Tac Toe");
+      setVisible(true);
     }
-    
     
     public static void main(String[] args) {
       GuiMain window  = new GuiMain();
-      GridLayout layout = new GridLayout();
-      window.setLayout(layout);
-      window.setTitle("Tic Tac Toe");
-      window.setSize(500, 400);
       window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      window.setVisible(true);
-	} 
+	}
 }
